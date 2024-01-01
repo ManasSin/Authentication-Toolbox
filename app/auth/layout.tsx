@@ -1,0 +1,15 @@
+import { FC } from "react";
+
+interface layoutProps {
+  children: React.ReactNode;
+}
+
+const layout: FC<layoutProps> = ({ children }) => {
+  return (
+    <div className="h-full flex items-center justify-center bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-sky-200 to-blue-600">
+      {children}
+    </div>
+  );
+};
+
+export default layout;

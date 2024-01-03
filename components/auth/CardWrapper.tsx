@@ -17,6 +17,7 @@ interface CardWrapperProps {
   backButtonLabel: string;
   backButtonHref: string;
   showSocial?: boolean;
+  headerText?: string;
 }
 
 const CardWrapper: FC<CardWrapperProps> = ({
@@ -25,11 +26,12 @@ const CardWrapper: FC<CardWrapperProps> = ({
   backButtonLabel,
   headerlabel,
   showSocial,
+  headerText,
 }) => {
   return (
     <Card className="w-[400px] shadow-md">
       <CardHeader>
-        <Header label={headerlabel} headerText={"🔐 Auth"} />
+        <Header label={headerlabel} headerText={`${headerText}`} />
       </CardHeader>
       <CardContent>{children}</CardContent>
       {showSocial && (

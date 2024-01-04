@@ -12,7 +12,7 @@ export const publicRoutes = ["/"];
  * @type {sring[]}
  */
 
-export const authRoutes = ["/auth/login", "auth/register"];
+export const authRoutes = ["/auth/login", "/auth/register"];
 
 /**
  * The prefix for API authentication routes

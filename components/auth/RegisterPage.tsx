@@ -21,12 +21,14 @@ import FormError from "@/components/shared/FormError";
 import FormSuccess from "@/components/shared/FormSuccess";
 import { register } from "@/actions/register";
 import { TRegisterSchema } from "@/types/schemaTypes";
+import { EyeOpenIcon, EyeClosedIcon } from "@/components/Icons";
 
 interface RegisterFormProps {}
 
 const RegisterForm: FC<RegisterFormProps> = ({}) => {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
+  const [showPassword, setShowPassword] = useState<Boolean>(false);
   const [isPending, startTransition] = useTransition();
 
   const form = useForm<TRegisterSchema>({
@@ -49,6 +51,12 @@ const RegisterForm: FC<RegisterFormProps> = ({}) => {
       });
     });
   };
+
+  const toggleShowPassword = () => {
+    // e.preventDefault();
+    setShowPassword(!showPassword);
+  };
+  const passwordFieldType = showPassword === true ? "text" : "password";
 
   return (
     <CardWrapper
@@ -105,12 +113,26 @@ const RegisterForm: FC<RegisterFormProps> = ({}) => {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input
-                      {...field}
-                      placeholder="********"
-                      type="password"
-                      disabled={isPending}
-                    />
+                    <div className="relative">
+                      <Input
+                        {...field}
+                        placeholder="********"
+                        type={passwordFieldType}
+                        disabled={isPending}
+                      />
+                      {/* {passwordFieldType === "password" && ( */}
+                      <div
+                        onClick={toggleShowPassword}
+                        className="absolute right-2 top-0 cursor-pointer h-full py-2"
+                      >
+                        {showPassword ? (
+                          <EyeOpenIcon className="w-5 h-5" />
+                        ) : (
+                          <EyeClosedIcon className="w-5 h-5" />
+                        )}
+                      </div>
+                      {/* )} */}
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>

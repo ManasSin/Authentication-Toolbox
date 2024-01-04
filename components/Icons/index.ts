@@ -6,6 +6,15 @@ import { FaGithub } from "react-icons/fa";
 import {
   ExclamationTriangleIcon,
   CheckCircledIcon,
+  EyeClosedIcon,
+  EyeOpenIcon,
 } from "@radix-ui/react-icons";
 
-export { FcGoogle, FaGithub, ExclamationTriangleIcon, CheckCircledIcon };
+export {
+  FcGoogle,
+  FaGithub,
+  ExclamationTriangleIcon,
+  CheckCircledIcon,
+  EyeClosedIcon,
+  EyeOpenIcon,
+};

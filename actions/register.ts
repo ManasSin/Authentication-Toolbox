@@ -6,6 +6,7 @@ import { db } from "@/lib/db";
 import { RegisterSchema } from "@/schemas";
 import { TRegisterSchema } from "@/types/schemaTypes";
 import { getUserByEmail } from "@/lib/getUsers";
+import { generateVerificationToken } from "@/lib/token";
 // learn about progresive inhancement in server action, for register.
 
 export const register = async (values: TRegisterSchema) => {
@@ -31,7 +32,9 @@ export const register = async (values: TRegisterSchema) => {
     },
   });
 
+  const verificationToken = await generateVerificationToken(email);
+
   // TODO: Send verification token email
 
-  return { success: "User created! 🎉" };
+  return { success: "Confirmation email sent!" };
 };

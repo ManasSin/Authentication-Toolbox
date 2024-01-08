@@ -1,6 +1,8 @@
 "use server";
 
 import { signIn } from "@/auth";
+import { getUserByEmail } from "@/lib/getUsers";
+import { generateVerificationToken } from "@/lib/token";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { LoginSchema } from "@/schemas";
 import { TLoginSchema } from "@/types/schemaTypes";
@@ -16,6 +18,19 @@ export const login = async (values: TLoginSchema) => {
     };
 
   const { email, password } = validatedFields.data;
+
+  const existingUser = await getUserByEmail(email);
+
+  if (!existingUser || !existingUser.email || !existingUser.password)
+    return { error: "Email does not exists!" };
+
+  if (!existingUser?.emailVerified) {
+    const verificationToken = await generateVerificationToken(
+      existingUser.email
+    );
+
+    return { success: "Confirmation Email sent" };
+  }
 
   try {
     await signIn("credentials", {
